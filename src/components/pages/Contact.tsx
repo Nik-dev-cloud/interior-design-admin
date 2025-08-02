@@ -28,15 +28,15 @@ const Contact: React.FC = () => {
             {/* Contact Form */}
             <div>
               <h2 className="text-3xl font-light text-gray-900 mb-6">Start Your Project</h2>
-              <form action="https://formsubmit.co/el/tiroxa" method="POST" className="space-y-6">
+              <form action="https://formsubmit.co/el/fb4b9854b4d5d530f46887ffc5845d7f" method="POST" className="space-y-6">
                 {/*
-                  On submit, the following details will be sent in an email to vipulhp3@gmail.com:
-                  - name
-                  - email
-                  - phone
-                  - projectType
-                  - budget
-                  - message
+                  On submit, the following fields will be sent to your FormSubmit endpoint:
+                  - name (Full Name)
+                  - email (Email Address)
+                  - phone (Phone Number)
+                  - projectType (Project Type)
+                  - budget (Budget Range)
+                  - message (Project Details)
                 */}
                 {/* Success and error messages are handled by formsubmit.co's redirect or response page. */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
