@@ -28,7 +28,7 @@ const Contact: React.FC = () => {
             {/* Contact Form */}
             <div>
               <h2 className="text-3xl font-light text-gray-900 mb-6">Start Your Project</h2>
-              <form action="https://formsubmit.co/vipulhp3@gmail.com" method="POST" className="space-y-6">
+              <form action="https://formsubmit.co/el/tiroxa" method="POST" className="space-y-6">
                 {/*
                   On submit, the following details will be sent in an email to vipulhp3@gmail.com:
                   - name
