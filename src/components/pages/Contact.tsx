@@ -1,70 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { MapPin, Phone, Mail, Clock, Instagram, Facebook, Linkedin, Send } from 'lucide-react';
 
 const Contact: React.FC = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    projectType: '',
-    budget: '',
-    message: ''
-  });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
 
-  const [submitting, setSubmitting] = useState(false);
-  const [submitSuccess, setSubmitSuccess] = useState<string | null>(null);
-  const [submitError, setSubmitError] = useState<string | null>(null);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  setSubmitting(true);
-  setSubmitSuccess(null);
-  setSubmitError(null);
-
-  try {
-    const response = await fetch('https://script.google.com/macros/s/AKfycbxUdNGKbNVpPkKsHCDCUZ1LwIFwyXK6D25eWbv_3pZSuJWLXMSD-Oel5Vm-slH_edRA9g/exec', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    });
-
-    const result = await response.json();
-    console.log('Contact form API response:', result);
-
-    if (typeof result === 'object' && result !== null && 'success' in result) {
-      if (result.success) {
-        setSubmitSuccess('Thank you! Your message has been sent.');
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          projectType: '',
-          budget: '',
-          message: ''
-        });
-      } else {
-        setSubmitError('Error: ' + (result.error || 'Unknown error'));
-      }
-    } else {
-      setSubmitError('Unexpected response from server.');
-    }
-  } catch (error) {
-    setSubmitError('There was an error submitting the form. Please try again.');
-    console.error('Contact form submission error:', error);
-  } finally {
-    setSubmitting(false);
-  }
-};
 
 
   return (
@@ -88,13 +28,17 @@ const Contact: React.FC = () => {
             {/* Contact Form */}
             <div>
               <h2 className="text-3xl font-light text-gray-900 mb-6">Start Your Project</h2>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                {submitSuccess && (
-                  <div className="p-3 bg-green-100 text-green-700 rounded text-center">{submitSuccess}</div>
-                )}
-                {submitError && (
-                  <div className="p-3 bg-red-100 text-red-700 rounded text-center">{submitError}</div>
-                )}
+              <form action="https://formsubmit.co/vipulhp3@gmail.com" method="POST" className="space-y-6">
+                {/*
+                  On submit, the following details will be sent in an email to vipulhp3@gmail.com:
+                  - name
+                  - email
+                  - phone
+                  - projectType
+                  - budget
+                  - message
+                */}
+                {/* Success and error messages are handled by formsubmit.co's redirect or response page. */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
@@ -104,8 +48,6 @@ const Contact: React.FC = () => {
                       type="text"
                       id="name"
                       name="name"
-                      value={formData.name}
-                      onChange={handleInputChange}
                       required
                       className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                     />
@@ -118,8 +60,6 @@ const Contact: React.FC = () => {
                       type="email"
                       id="email"
                       name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
                       required
                       className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                     />
@@ -135,8 +75,6 @@ const Contact: React.FC = () => {
                       type="tel"
                       id="phone"
                       name="phone"
-                      value={formData.phone}
-                      onChange={handleInputChange}
                       className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                     />
                   </div>
@@ -147,8 +85,6 @@ const Contact: React.FC = () => {
                     <select
                       id="projectType"
                       name="projectType"
-                      value={formData.projectType}
-                      onChange={handleInputChange}
                       className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                     >
                       <option value="">Select a service</option>
@@ -168,8 +104,6 @@ const Contact: React.FC = () => {
                   <select
                     id="budget"
                     name="budget"
-                    value={formData.budget}
-                    onChange={handleInputChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                   >
                     <option value="">Select budget range</option>
@@ -188,8 +122,6 @@ const Contact: React.FC = () => {
                   <textarea
                     id="message"
                     name="message"
-                    value={formData.message}
-                    onChange={handleInputChange}
                     rows={6}
                     required
                     placeholder="Tell me about your project, space, timeline, and any specific requirements..."
@@ -199,24 +131,15 @@ const Contact: React.FC = () => {
 
                 <button
                   type="submit"
-                  className="w-full bg-amber-600 text-white py-3 px-6 rounded-sm hover:bg-amber-700 transition-colors duration-200 flex items-center justify-center font-medium disabled:opacity-60"
-                  disabled={submitting}
+                  className="w-full bg-amber-600 text-white py-3 px-6 rounded-sm hover:bg-amber-700 transition-colors duration-200 flex items-center justify-center font-medium"
                 >
-                  {submitting ? (
-                    <>
-                      <svg className="animate-spin h-5 w-5 mr-2 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
-                      </svg>
-                      Sending...
-                    </>
-                  ) : (
-                    <>
-                      <Send className="h-5 w-5 mr-2" />
-                      Send Message
-                    </>
-                  )}
+                  <Send className="h-5 w-5 mr-2" />
+                  Send Message
                 </button>
+
+                {/* The following fields are sent in the email and stored in the sheet: */}
+                {/* name, email, phone, projectType, budget, message */}
+                {/* The email will be sent to vipulhp3@gmail.com (set in your Google Apps Script). */}
               </form>
             </div>
 
