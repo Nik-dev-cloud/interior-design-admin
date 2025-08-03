@@ -1,8 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { MapPin, Phone, Mail, Clock, Instagram, Facebook, Linkedin, Send } from 'lucide-react';
 
 const Contact: React.FC = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    projectType: '',
+    budget: '',
+    message: ''
+  });
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
 
 
 
@@ -28,15 +43,19 @@ const Contact: React.FC = () => {
             {/* Contact Form */}
             <div>
               <h2 className="text-3xl font-light text-gray-900 mb-6">Start Your Project</h2>
+<<<<<<< HEAD
               <form action="https://formsubmit.co/el/tiroxa" method="POST" className="space-y-6">
+=======
+              <form action="https://formsubmit.co/vipulhp3@gmail.com" method="POST" className="space-y-6">
+>>>>>>> 0466534 (final)
                 {/*
-                  On submit, the following fields will be sent to your FormSubmit endpoint:
-                  - name (Full Name)
-                  - email (Email Address)
-                  - phone (Phone Number)
-                  - projectType (Project Type)
-                  - budget (Budget Range)
-                  - message (Project Details)
+                  On submit, the following details will be sent in an email to vipulhp3@gmail.com:
+                  - name
+                  - email
+                  - phone
+                  - projectType
+                  - budget
+                  - message
                 */}
                 {/* Success and error messages are handled by formsubmit.co's redirect or response page. */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -128,6 +147,11 @@ const Contact: React.FC = () => {
                     className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                   />
                 </div>
+                 <input
+        type="hidden"
+        name="_next"
+        value="https://atul-web-alpha.vercel.app/"
+      />
 
                 <button
                   type="submit"
