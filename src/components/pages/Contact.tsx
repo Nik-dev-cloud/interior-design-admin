@@ -28,7 +28,7 @@ const Contact: React.FC = () => {
             {/* Contact Form */}
             <div>
               <h2 className="text-3xl font-light text-gray-900 mb-6">Start Your Project</h2>
-              <form action="https://formsubmit.co/el/fb4b9854b4d5d530f46887ffc5845d7f" method="POST" className="space-y-6">
+              <form action="https://formsubmit.co/el/vipulhp3@gmail.com" method="POST" className="space-y-6">
                 {/*
                   On submit, the following fields will be sent to your FormSubmit endpoint:
                   - name (Full Name)
